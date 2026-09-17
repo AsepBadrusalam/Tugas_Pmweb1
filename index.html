@@ -3,62 +3,259 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tugas PM Web 1 — halaman kolaborasi Asep Badrusalam dan Fathih Fitrah Ramadhan dengan konsep git branch + merge." />
   <title>Tugas PM Web 1 - Kolaborasi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
-    * { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
-    body { margin: 0; background: #f4f6fb; color: #222; }
-    nav { background: #1f2937; padding: 12px 20px; }
-    nav a { color: white; text-decoration: none; margin-right: 15px; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
-    .card { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,.08); margin-bottom: 20px; }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .btn { display: inline-block; background: #2563eb; color: white; padding: 10px 16px; border-radius: 8px; text-decoration: none; margin-top: 10px; }
-    .btn.green { background: #059669; }
-    footer { text-align: center; padding: 20px; color: #666; }
-    @media(max-width:600px){ .grid{ grid-template-columns: 1fr; } }
+    :root {
+      --bg: #F8FAFC;
+      --surface: #FFFFFF;
+      --ink: #334155;
+      --ink-strong: #0F172A;
+      --muted: #EBF0F5;
+      --muted-ink: #475569;
+      --line: #E2E8F0;
+      --primary: #64748B;
+      --accent: #EA580C;
+      --accent-strong: #C2410C;
+      --asep: #2563EB;
+      --fathih: #047857;
+      --radius: 16px;
+      --font-display: "Space Grotesk", system-ui, "Segoe UI", Arial, sans-serif;
+      --font-body: "Archivo", system-ui, "Segoe UI", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+    }
+    h1, h2, h3 { font-family: var(--font-display); color: var(--ink-strong); line-height: 1.2; margin: 0 0 12px; }
+    p { margin: 0 0 12px; }
+    a { color: var(--accent-strong); }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+    .skip-link {
+      position: absolute; left: 16px; top: -48px; z-index: 100;
+      background: var(--ink-strong); color: #fff; padding: 10px 16px;
+      border-radius: 8px; text-decoration: none; transition: top 200ms ease;
+    }
+    .skip-link:focus { top: 12px; color: #fff; }
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      max-width: 1024px; margin: 0 auto; padding: 0 20px;
+      display: flex; align-items: center; gap: 8px; min-height: 64px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; margin-right: auto; text-decoration: none; }
+    .brand-mark {
+      width: 36px; height: 36px; border-radius: 10px; flex: none;
+      background: var(--ink-strong); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+    }
+    .brand span { font-family: var(--font-display); font-weight: 700; color: var(--ink-strong); font-size: 15px; }
+    .site-nav { display: flex; align-items: center; gap: 4px; }
+    .site-nav a {
+      color: var(--muted-ink); text-decoration: none; font-weight: 600; font-size: 15px;
+      padding: 10px 14px; border-radius: 10px; min-height: 44px;
+      display: inline-flex; align-items: center; transition: background-color 200ms ease, color 200ms ease;
+    }
+    .site-nav a:hover { background: var(--muted); color: var(--ink-strong); }
+    .site-nav a[aria-current="page"] { background: var(--ink-strong); color: #fff; }
+    .container { max-width: 1024px; margin: 0 auto; padding: 0 20px; }
+    .hero {
+      border: 1px solid var(--line); border-radius: 24px;
+      background:
+        radial-gradient(560px 220px at 85% -60px, rgba(234, 88, 12, 0.14), transparent 70%),
+        radial-gradient(480px 200px at 10% 0, rgba(100, 116, 139, 0.16), transparent 70%),
+        var(--surface);
+      padding: 48px 32px; margin: 32px 0 24px; text-align: center;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--muted); color: var(--ink-strong);
+      font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 999px; margin-bottom: 16px;
+    }
+    .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .hero h1 { font-size: clamp(30px, 5vw, 48px); letter-spacing: -0.02em; }
+    .hero h1 .hl { color: var(--accent-strong); }
+    .lead { max-width: 640px; margin: 0 auto 8px; color: var(--muted-ink); font-size: 17px; }
+    .meta-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 16px 0 24px; padding: 0; list-style: none; }
+    .meta-row li {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--line); background: var(--bg);
+      border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 600; color: var(--ink-strong);
+    }
+    .meta-row svg { flex: none; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 48px; padding: 12px 22px; border-radius: 12px;
+      font-weight: 700; font-size: 15px; text-decoration: none; cursor: pointer;
+      transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+    }
+    .btn-primary { background: var(--accent-strong); color: #fff; box-shadow: 0 6px 16px rgba(194, 65, 12, 0.28); }
+    .btn-primary:hover { background: #9A3412; transform: translateY(-2px); color: #fff; }
+    .btn-outline { background: var(--surface); color: var(--ink-strong); border: 1.5px solid var(--line); }
+    .btn-outline:hover { border-color: var(--primary); transform: translateY(-2px); color: var(--ink-strong); }
+    .section { margin: 40px 0; }
+    .section-head { max-width: 640px; margin-bottom: 20px; }
+    .section-head h2 { font-size: clamp(22px, 3.4vw, 30px); letter-spacing: -0.01em; }
+    .section-head p { color: var(--muted-ink); }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 28px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+      transition: transform 220ms ease, box-shadow 220ms ease;
+    }
+    .member-card { border-top: 4px solid var(--primary); }
+    .member-card.asep { border-top-color: var(--asep); }
+    .member-card.fathih { border-top-color: var(--fathih); }
+    a.member-card-link { text-decoration: none; color: inherit; display: block; }
+    a.member-card-link:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12); }
+    .member-top { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+    .avatar {
+      width: 56px; height: 56px; border-radius: 50%; flex: none;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 20px; color: #fff;
+    }
+    .avatar.asep { background: var(--asep); }
+    .avatar.fathih { background: var(--fathih); }
+    .member-top h3 { margin: 0; font-size: 20px; }
+    .member-top small { color: var(--muted-ink); font-weight: 600; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--muted); color: var(--ink-strong);
+      font-size: 13px; font-weight: 600; border-radius: 999px; padding: 5px 12px;
+    }
+    .chip.code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 12.5px; }
+    code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; background: var(--muted); padding: 2px 7px; border-radius: 6px; font-size: 0.88em; }
+    .card .btn { margin-top: 8px; }
+    .btn.blue { background: var(--asep); color: #fff; }
+    .btn.blue:hover { background: #1D4ED8; color: #fff; transform: translateY(-2px); }
+    .btn.green { background: var(--fathih); color: #fff; }
+    .btn.green:hover { background: #065F46; color: #fff; transform: translateY(-2px); }
+    .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 12px; counter-reset: step; }
+    .steps li {
+      counter-increment: step; position: relative;
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: 12px; padding: 16px 16px 16px 64px;
+    }
+    .steps li::before {
+      content: counter(step); position: absolute; left: 16px; top: 14px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--ink-strong); color: #fff;
+      font-family: var(--font-display); font-weight: 700; font-size: 15px;
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    footer { text-align: center; padding: 32px 20px 40px; color: var(--muted-ink); font-size: 14px; }
+    footer strong { color: var(--ink-strong); }
+    @media (min-width: 640px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; transform: none !important; }
+    }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">Beranda</a>
-    <a href="anggota1.html">Asep Badrusalam</a>
-    <a href="anggota2.html">Fathih Fitrah Ramadhan</a>
-  </nav>
-
-  <div class="container">
-    <div class="card">
-      <h1>Tugas PM Web 1 - Halaman Kolaborasi</h1>
-      <p>Halaman ini dikerjakan <strong>bersama (kolaborasi)</strong> di branch <code>main</code>.</p>
-      <p>Kelompok: Asep Badrusalam & Fathih Fitrah Ramadhan. 2 halaman individu digabungkan dengan konsep <strong>git branch + merge</strong> menjadi 1 web utuh.</p>
+  <a class="skip-link" href="#konten">Lewati ke konten</a>
+  <header class="site-header">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="Tugas PM Web 1 - Beranda">
+        <span class="brand-mark" aria-hidden="true">PM</span>
+        <span>Tugas PM Web 1</span>
+      </a>
+      <nav class="site-nav" aria-label="Navigasi utama">
+        <a href="index.html" aria-current="page">Beranda</a>
+        <a href="anggota1.html">Asep Badrusalam</a>
+        <a href="anggota2.html">Fathih Fitrah Ramadhan</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="grid">
-      <div class="card">
-        <h2>Asep Badrusalam</h2>
-        <p><strong>Nama:</strong> Asep Badrusalam</p>
-        <p>Halaman profil + hobi, dikerjakan di branch <code>feature/halaman-anggota1</code>.</p>
-        <a class="btn" href="anggota1.html">Lihat Halaman Asep Badrusalam</a>
+  <main id="konten" class="container">
+    <section class="hero" aria-labelledby="judul-hero">
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Kolaborasi &bull; Git Branch + Merge</p>
+      <h1 id="judul-hero">Satu Web Utuh, <span class="hl">Dikerjakan Bersama</span></h1>
+      <p class="lead">Halaman ini dikerjakan <strong>bersama (kolaborasi)</strong> di branch <code>main</code>. Kelompok <strong>Asep Badrusalam</strong> &amp; <strong>Fathih Fitrah Ramadhan</strong> — 2 halaman individu digabungkan dengan konsep <strong>git branch + merge</strong> menjadi 1 web utuh.</p>
+      <ul class="meta-row" aria-label="Ringkasan proyek">
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17" cy="9" r="2.6"/><path d="M16 14.3c2.9.3 5.5 2.4 5.5 5.7"/></svg>2 Anggota</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M4 10h16"/></svg>3 Halaman</li>
+        <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="8" r="2.5"/><path d="M6 8.5v7M18 10.5c0 4-5 3.5-8 5"/></svg>3 Branch</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#anggota">Kenali Anggota</a>
+        <a class="btn btn-outline" href="#alur">Lihat Alur Git</a>
       </div>
-      <div class="card">
-        <h2>Fathih Fitrah Ramadhan</h2>
-        <p><strong>Nama:</strong> Fathih Fitrah Ramadhan</p>
-        <p>Halaman profil + skill, dikerjakan di branch <code>feature/halaman-anggota2</code>.</p>
-        <a class="btn green" href="anggota2.html">Lihat Halaman Fathih Fitrah Ramadhan</a>
+    </section>
+
+    <section class="section" id="anggota" aria-labelledby="judul-anggota">
+      <div class="section-head">
+        <h2 id="judul-anggota">Anggota Kelompok</h2>
+        <p>Masing-masing mengerjakan halaman profil di branch sendiri, lalu digabung ke <code>main</code>.</p>
       </div>
-    </div>
+      <div class="grid">
+        <a class="card member-card-link member-card asep" href="anggota1.html" aria-label="Buka halaman Asep Badrusalam">
+          <div class="member-top">
+            <span class="avatar asep" aria-hidden="true">AB</span>
+            <div>
+              <h3>Asep Badrusalam</h3>
+              <small>3337250029 / Kelas B</small>
+            </div>
+          </div>
+          <p>Halaman profil + hobi, dikerjakan di branch <code>feature/halaman-anggota1</code>.</p>
+          <div class="chip-row">
+            <span class="chip">Profil + Hobi</span>
+            <span class="chip code">feature/halaman-anggota1</span>
+          </div>
+          <span class="btn blue">Lihat Halaman Asep Badrusalam
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+        <a class="card member-card-link member-card fathih" href="anggota2.html" aria-label="Buka halaman Fathih Fitrah Ramadhan">
+          <div class="member-top">
+            <span class="avatar fathih" aria-hidden="true">FR</span>
+            <div>
+              <h3>Fathih Fitrah Ramadhan</h3>
+              <small>3337250024 / Kelas B</small>
+            </div>
+          </div>
+          <p>Halaman profil + skill, dikerjakan di branch <code>feature/halaman-anggota2</code>.</p>
+          <div class="chip-row">
+            <span class="chip">Profil + Skill</span>
+            <span class="chip code">feature/halaman-anggota2</span>
+          </div>
+          <span class="btn green">Lihat Halaman Fathih Fitrah Ramadhan
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+      </div>
+    </section>
 
-    <div class="card">
-      <h3>Alur Kolaborasi Git</h3>
-      <ol>
-        <li>Buat branch masing-masing: <code>feature/halaman-anggota1</code> dan <code>feature/halaman-anggota2</code></li>
-        <li>Masing-masing <code>commit</code> + <code>push</code> di branch sendiri</li>
-        <li><code>merge</code> kedua branch ke <code>main</code> (pull request)</li>
-        <li>Hasil akhir: 3 halaman dalam 1 web</li>
-      </ol>
-    </div>
-  </div>
+    <section class="section" id="alur" aria-labelledby="judul-alur">
+      <div class="card">
+        <h2 id="judul-alur">Alur Kolaborasi Git</h2>
+        <ol class="steps">
+          <li>Buat branch masing-masing: <code>feature/halaman-anggota1</code> dan <code>feature/halaman-anggota2</code></li>
+          <li>Masing-masing <code>commit</code> + <code>push</code> di branch sendiri</li>
+          <li><code>merge</code> kedua branch ke <code>main</code> (pull request)</li>
+          <li>Hasil akhir: 3 halaman dalam 1 web</li>
+        </ol>
+      </div>
+    </section>
+  </main>
 
-  <footer>&copy; 2026 Tugas PM Web 1 - Asep Badrusalam & Fathih Fitrah Ramadhan</footer>
+  <footer>&copy; 2026 <strong>Tugas PM Web 1</strong> - Asep Badrusalam &amp; Fathih Fitrah Ramadhan</footer>
 </body>
 </html>
