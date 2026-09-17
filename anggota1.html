@@ -3,40 +3,193 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Halaman profil Asep Badrusalam — NIM 3337250029, Kelas B. Tugas PM Web 1." />
   <title>Asep Badrusalam</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <style>
-    * { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
-    body { margin: 0; background: #eef2ff; color: #222; }
-    nav { background: #1f2937; padding: 12px 20px; }
-    nav a { color: white; text-decoration: none; margin-right: 15px; font-weight: bold; }
-    .container { max-width: 800px; margin: 30px auto; padding: 0 20px; }
-    .card { background: white; border-radius: 10px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,.08); }
-    .badge { display: inline-block; background: #2563eb; color: white; padding: 4px 10px; border-radius: 20px; font-size: 13px; }
-    ul { line-height: 1.8; }
-    a.back { display: inline-block; margin-top: 15px; color: #2563eb; }
+    :root {
+      --bg: #F8FAFC;
+      --surface: #FFFFFF;
+      --ink: #334155;
+      --ink-strong: #0F172A;
+      --muted: #EBF0F5;
+      --muted-ink: #475569;
+      --line: #E2E8F0;
+      --primary: #64748B;
+      --accent: #EA580C;
+      --accent-strong: #C2410C;
+      --member: #2563EB;
+      --member-dark: #1D4ED8;
+      --radius: 16px;
+      --font-display: "Space Grotesk", system-ui, "Segoe UI", Arial, sans-serif;
+      --font-body: "Archivo", system-ui, "Segoe UI", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--ink);
+      font-family: var(--font-body); font-size: 16px; line-height: 1.6;
+    }
+    h1, h2, h3 { font-family: var(--font-display); color: var(--ink-strong); line-height: 1.2; margin: 0 0 12px; }
+    p { margin: 0 0 12px; }
+    a { color: var(--accent-strong); }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
+    .skip-link {
+      position: absolute; left: 16px; top: -48px; z-index: 100;
+      background: var(--ink-strong); color: #fff; padding: 10px 16px;
+      border-radius: 8px; text-decoration: none; transition: top 200ms ease;
+    }
+    .skip-link:focus { top: 12px; color: #fff; }
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      max-width: 960px; margin: 0 auto; padding: 0 20px;
+      display: flex; align-items: center; gap: 8px; min-height: 64px;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; margin-right: auto; text-decoration: none; }
+    .brand-mark {
+      width: 36px; height: 36px; border-radius: 10px; flex: none;
+      background: var(--ink-strong); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+    }
+    .brand span { font-family: var(--font-display); font-weight: 700; color: var(--ink-strong); font-size: 15px; }
+    .site-nav { display: flex; align-items: center; gap: 4px; }
+    .site-nav a {
+      color: var(--muted-ink); text-decoration: none; font-weight: 600; font-size: 15px;
+      padding: 10px 14px; border-radius: 10px; min-height: 44px;
+      display: inline-flex; align-items: center; transition: background-color 200ms ease, color 200ms ease;
+    }
+    .site-nav a:hover { background: var(--muted); color: var(--ink-strong); }
+    .site-nav a[aria-current="page"] { background: var(--member); color: #fff; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+    .profile-hero {
+      border: 1px solid var(--line); border-top: 4px solid var(--member); border-radius: 24px;
+      background:
+        radial-gradient(520px 210px at 88% -60px, rgba(37, 99, 235, 0.13), transparent 70%),
+        var(--surface);
+      padding: 40px 32px; margin: 32px 0 20px;
+      display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
+    }
+    .avatar {
+      width: 96px; height: 96px; border-radius: 28px; flex: none;
+      background: var(--member); color: #fff;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 34px;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.32);
+    }
+    .profile-hero h1 { font-size: clamp(26px, 4.4vw, 38px); letter-spacing: -0.02em; margin-bottom: 6px; }
+    .profile-hero .role { color: var(--muted-ink); font-weight: 600; margin-bottom: 12px; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--muted); color: var(--ink-strong);
+      font-size: 13px; font-weight: 600; border-radius: 999px; padding: 5px 12px;
+    }
+    .chip.branch { background: var(--member); color: #fff; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 12.5px; }
+    code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; background: var(--muted); padding: 2px 7px; border-radius: 6px; font-size: 0.88em; }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 24px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 28px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+    }
+    .card h2 { font-size: 20px; display: flex; align-items: center; gap: 10px; }
+    .card h2 svg { flex: none; color: var(--member); }
+    dl.biodata { margin: 0; display: grid; gap: 10px; }
+    dl.biodata div { display: grid; grid-template-columns: 130px 1fr; gap: 12px; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+    dl.biodata div:last-child { border-bottom: 0; }
+    dl.biodata dt { font-weight: 700; color: var(--ink-strong); font-size: 14px; }
+    dl.biodata dd { margin: 0; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1.5px solid var(--line); border-radius: 999px; padding: 6px 14px;
+      font-size: 14px; font-weight: 600; color: var(--ink-strong); background: var(--bg);
+      transition: border-color 200ms ease, transform 200ms ease;
+    }
+    .tag:hover { border-color: var(--member); transform: translateY(-2px); }
+    a.back {
+      display: inline-flex; align-items: center; gap: 8px;
+      min-height: 48px; margin: 4px 0 8px; padding: 10px 18px;
+      border-radius: 12px; font-weight: 700; font-size: 15px; text-decoration: none;
+      background: var(--member); color: #fff;
+      transition: background-color 200ms ease, transform 200ms ease;
+    }
+    a.back:hover { background: var(--member-dark); transform: translateY(-2px); color: #fff; }
+    footer { text-align: center; padding: 28px 20px 40px; color: var(--muted-ink); font-size: 14px; }
+    @media (min-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; transform: none !important; }
+    }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">Beranda</a>
-    <a href="anggota1.html">Asep Badrusalam</a>
-    <a href="anggota2.html">Fathih Fitrah Ramadhan</a>
-  </nav>
-  <div class="container">
-    <div class="card">
-      <span class="badge">Branch: feature/halaman-anggota1</span>
-      <h1>Halo, saya Asep Badrusalam</h1>
-      <p>Halaman ini dikerjakan <strong>secara individu</strong> oleh Asep Badrusalam di branch <code>feature/halaman-anggota1</code>.</p>
-      <h3>Biodata Singkat</h3>
-      <ul>
-        <li><strong>NIM / Kelas:</strong> 3337250029 / Kelas B</li>
-        <li><strong>Hobi:</strong> Ngoding, desain web</li>
-        <li><strong>Skill:</strong> HTML, CSS, Git & GitHub</li>
-      </ul>
-      <h3>Tentang Saya</h3>
-      <p>Saya Asep Badrusalam bertanggung jawab membuat halaman profil ini, lalu merge ke <code>main</code> menggunakan konsep git agar menjadi 1 web utuh bersama halaman kolaborasi dan halaman Fathih Fitrah Ramadhan.</p>
-      <a class="back" href="index.html">&larr; Kembali ke halaman kolaborasi</a>
+  <a class="skip-link" href="#konten">Lewati ke konten</a>
+  <header class="site-header">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="Tugas PM Web 1 - Beranda">
+        <span class="brand-mark" aria-hidden="true">PM</span>
+        <span>Tugas PM Web 1</span>
+      </a>
+      <nav class="site-nav" aria-label="Navigasi utama">
+        <a href="index.html">Beranda</a>
+        <a href="anggota1.html" aria-current="page">Asep Badrusalam</a>
+        <a href="anggota2.html">Fathih Fitrah Ramadhan</a>
+      </nav>
     </div>
-  </div>
+  </header>
+
+  <main id="konten" class="container">
+    <section class="profile-hero" aria-labelledby="nama-asep">
+      <span class="avatar" aria-hidden="true">AB</span>
+      <div>
+        <div class="chip-row" style="margin-bottom:10px">
+          <span class="chip branch">Branch: feature/halaman-anggota1</span>
+        </div>
+        <h1 id="nama-asep">Halo, saya Asep Badrusalam</h1>
+        <p class="role">Halaman ini dikerjakan <strong>secara individu</strong> oleh Asep Badrusalam di branch <code>feature/halaman-anggota1</code>.</p>
+        <div class="chip-row">
+          <span class="chip">3337250029 / Kelas B</span>
+          <span class="chip">Ngoding</span>
+          <span class="chip">Desain Web</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="card" aria-labelledby="biodata">
+        <h2 id="biodata"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>Biodata Singkat</h2>
+        <dl class="biodata">
+          <div><dt>Nama</dt><dd>Asep Badrusalam</dd></div>
+          <div><dt>NIM / Kelas</dt><dd><strong>3337250029 / Kelas B</strong></dd></div>
+          <div><dt>Hobi</dt><dd>Ngoding, desain web</dd></div>
+          <div><dt>Skill</dt><dd>HTML, CSS, Git &amp; GitHub</dd></div>
+        </dl>
+      </section>
+      <section class="card" aria-labelledby="tentang">
+        <h2 id="tentang"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>Tentang Saya</h2>
+        <p>Saya Asep Badrusalam bertanggung jawab membuat halaman profil ini, lalu merge ke <code>main</code> menggunakan konsep git agar menjadi 1 web utuh bersama halaman kolaborasi dan halaman Fathih Fitrah Ramadhan.</p>
+        <div class="tag-row" aria-label="Keahlian">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">Git &amp; GitHub</span>
+        </div>
+      </section>
+    </div>
+
+    <a class="back" href="index.html">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      Kembali ke halaman kolaborasi
+    </a>
+  </main>
+
+  <footer>&copy; 2026 Tugas PM Web 1 - Asep Badrusalam (3337250029 / Kelas B)</footer>
 </body>
 </html>
