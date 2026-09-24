@@ -90,6 +90,13 @@
       font-family: var(--font-display); font-weight: 700; font-size: 34px;
       box-shadow: 0 10px 24px rgba(4, 120, 87, 0.3);
     }
+    /* Foto profil: ganti inisial FR */
+    .avatar-photo {
+      width: 96px; height: 96px; border-radius: 28px; flex: none;
+      object-fit: cover; object-position: top center;
+      box-shadow: 0 10px 24px rgba(4, 120, 87, 0.3);
+      background: var(--muted);
+    }
     .profile-hero h1 { font-size: clamp(26px, 4.4vw, 38px); letter-spacing: -0.02em; margin-bottom: 6px; }
     .profile-hero .role { color: var(--muted-ink); font-weight: 600; margin-bottom: 12px; }
     .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -147,6 +154,7 @@
       .container { padding: 0 12px; }
       .profile-hero { padding: 28px 20px; flex-direction: column; align-items: flex-start; }
       .avatar { width: 72px; height: 72px; font-size: 26px; border-radius: 20px; }
+      .avatar-photo { width: 72px; height: 72px; border-radius: 20px; }
       .profile-hero h1 { font-size: 1.5rem; }
       dl.biodata div { grid-template-columns: 1fr; gap: 2px; }
       table.skill th, table.skill td { padding: 10px; font-size: 14px; }
@@ -177,7 +185,7 @@
 
   <main id="konten" class="container">
     <section class="profile-hero" aria-labelledby="nama-fathih">
-      <span class="avatar" aria-hidden="true">FR</span>
+      <img class="avatar-photo" src="assets/fathih-fitrah-ramadhan.jpeg" alt="Foto Fathih Fitrah Ramadhan" />
       <div>
         <div class="chip-row" style="margin-bottom:10px">
           <span class="chip branch">Branch: feature/fathih-fitrah-ramadhan</span>
