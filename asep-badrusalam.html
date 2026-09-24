@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <!-- Bootstrap 5: dipakai untuk navbar hamburger + badge + progress + grid responsif -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     :root {
       --bg: #F8FAFC;
@@ -60,6 +62,11 @@
     }
     .brand span { font-family: var(--font-display); font-weight: 700; color: var(--ink-strong); font-size: 15px; }
     .site-nav { display: flex; align-items: center; gap: 4px; }
+    /* Tombol hamburger (Bootstrap navbar-toggler), hanya tampil di HP */
+    .nav-toggle {
+      border: 1.5px solid var(--line); border-radius: 10px; background: var(--surface);
+      font-size: 20px; line-height: 1; padding: 8px 12px; cursor: pointer; color: var(--ink-strong);
+    }
     .site-nav a {
       color: var(--muted-ink); text-decoration: none; font-weight: 600; font-size: 15px;
       padding: 10px 14px; border-radius: 10px; min-height: 44px;
@@ -124,6 +131,24 @@
     a.back:hover { background: var(--member-dark); transform: translateY(-2px); color: #fff; }
     footer { text-align: center; padding: 28px 20px 40px; color: var(--muted-ink); font-size: 14px; }
     @media (min-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } }
+    /* MEDIA QUERY layar kecil/HP: rapikan nav + hero + biodata (Flexbox jadi kolom) */
+    @media (max-width: 991.98px) {
+      .nav-inner { flex-wrap: wrap; row-gap: 0; }
+      .site-nav.collapse:not(.show) { display: none; }
+      .site-nav.collapse.show {
+        display: flex; flex-direction: column; align-items: stretch;
+        width: 100%; padding: 8px 0 16px; gap: 4px;
+      }
+      .site-nav.collapse.show a { width: 100%; }
+    }
+    @media (max-width: 600px) {
+      .nav-inner { padding: 0 12px; }
+      .container { padding: 0 12px; }
+      .profile-hero { padding: 28px 20px; flex-direction: column; align-items: flex-start; }
+      .avatar { width: 72px; height: 72px; font-size: 26px; border-radius: 20px; }
+      .profile-hero h1 { font-size: 1.5rem; }
+      dl.biodata div { grid-template-columns: 1fr; gap: 2px; }
+    }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition: none !important; transform: none !important; }
@@ -138,7 +163,9 @@
         <span class="brand-mark" aria-hidden="true">PM</span>
         <span>Tugas PM Web 1</span>
       </a>
-      <nav class="site-nav" aria-label="Navigasi utama">
+      <!-- Navbar responsif: hamburger di HP (Bootstrap collapse), full menu di laptop -->
+      <button class="nav-toggle d-lg-none ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Buka navigasi">&#9776;</button>
+      <nav class="site-nav collapse navbar-collapse d-lg-flex" id="mainNav" aria-label="Navigasi utama">
         <a href="index.html">Beranda</a>
         <a href="asep-badrusalam.html" aria-current="page">Asep Badrusalam</a>
         <a href="fathih-fitrah-ramadhan.html">Fathih Fitrah Ramadhan</a>
@@ -184,6 +211,25 @@
       </section>
     </div>
 
+    <!-- Komponen Bootstrap: progress skill + badge (bukti pakai Bootstrap, responsif) -->
+    <section class="card mb-4" aria-labelledby="level-skill">
+      <h2 id="level-skill"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>Level Skill <span class="badge text-bg-primary ms-1">Bootstrap</span></h2>
+      <div class="row g-3">
+        <div class="col-12 col-md-4">
+          <p class="mb-1 fw-bold">HTML <span class="badge text-bg-success">Menengah</span></p>
+          <div class="progress" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar" style="width:70%">70%</div></div>
+        </div>
+        <div class="col-12 col-md-4">
+          <p class="mb-1 fw-bold">CSS <span class="badge text-bg-success">Menengah</span></p>
+          <div class="progress" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar bg-success" style="width:65%">65%</div></div>
+        </div>
+        <div class="col-12 col-md-4">
+          <p class="mb-1 fw-bold">Git &amp; GitHub <span class="badge text-bg-secondary">Dasar-Menengah</span></p>
+          <div class="progress" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar bg-dark" style="width:55%">55%</div></div>
+        </div>
+      </div>
+    </section>
+
     <a class="back" href="index.html">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
       Kembali ke halaman kolaborasi
@@ -191,5 +237,7 @@
   </main>
 
   <footer>&copy; 2026 Tugas PM Web 1 - Asep Badrusalam (3337250029 / Kelas B)</footer>
+  <!-- Bootstrap JS: untuk navbar hamburger (collapse) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
