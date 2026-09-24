@@ -139,6 +139,11 @@
     }
     .avatar.asep { background: var(--asep); }
     .avatar.fathih { background: var(--fathih); }
+    /* Foto profil anggota di kartu: ganti inisial AB/FR */
+    .avatar-photo {
+      width: 56px; height: 56px; border-radius: 50%; flex: none;
+      object-fit: cover; object-position: top center; background: var(--muted);
+    }
     .member-top h3 { margin: 0; font-size: 20px; }
     .member-top small { color: var(--muted-ink); font-weight: 600; }
     .chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
@@ -242,7 +247,7 @@
       <div class="grid">
         <a class="card member-card-link member-card asep" href="asep-badrusalam.html" aria-label="Buka halaman Asep Badrusalam">
           <div class="member-top">
-            <span class="avatar asep" aria-hidden="true">AB</span>
+            <img class="avatar-photo" src="assets/asep-badrusalam.png" alt="Foto Asep Badrusalam" />
             <div>
               <h3>Asep Badrusalam</h3>
               <small>3337250029 / Kelas B</small>
@@ -259,7 +264,7 @@
         </a>
         <a class="card member-card-link member-card fathih" href="fathih-fitrah-ramadhan.html" aria-label="Buka halaman Fathih Fitrah Ramadhan">
           <div class="member-top">
-            <span class="avatar fathih" aria-hidden="true">FR</span>
+            <img class="avatar-photo" src="assets/fathih-fitrah-ramadhan.jpeg" alt="Foto Fathih Fitrah Ramadhan" />
             <div>
               <h3>Fathih Fitrah Ramadhan</h3>
               <small>3337250024 / Kelas B</small>
