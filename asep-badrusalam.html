@@ -90,6 +90,13 @@
       font-family: var(--font-display); font-weight: 700; font-size: 34px;
       box-shadow: 0 10px 24px rgba(37, 99, 235, 0.32);
     }
+    /* Foto profil: ganti inisial AB */
+    .avatar-photo {
+      width: 96px; height: 96px; border-radius: 28px; flex: none;
+      object-fit: cover; object-position: top center;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.32);
+      background: var(--muted);
+    }
     .profile-hero h1 { font-size: clamp(26px, 4.4vw, 38px); letter-spacing: -0.02em; margin-bottom: 6px; }
     .profile-hero .role { color: var(--muted-ink); font-weight: 600; margin-bottom: 12px; }
     .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -146,6 +153,7 @@
       .container { padding: 0 12px; }
       .profile-hero { padding: 28px 20px; flex-direction: column; align-items: flex-start; }
       .avatar { width: 72px; height: 72px; font-size: 26px; border-radius: 20px; }
+      .avatar-photo { width: 72px; height: 72px; border-radius: 20px; }
       .profile-hero h1 { font-size: 1.5rem; }
       dl.biodata div { grid-template-columns: 1fr; gap: 2px; }
     }
@@ -175,7 +183,7 @@
 
   <main id="konten" class="container">
     <section class="profile-hero" aria-labelledby="nama-asep">
-      <span class="avatar" aria-hidden="true">AB</span>
+      <img class="avatar-photo" src="assets/asep-badrusalam.png" alt="Foto Asep Badrusalam" />
       <div>
         <div class="chip-row" style="margin-bottom:10px">
           <span class="chip branch">Branch: feature/asep-badrusalam</span>
